@@ -34,7 +34,7 @@ a {
   text-decoration: none;
 
   &:hover {
-    cursor: url(/images/cursor.webp), auto;
+    cursor: url(../images/cursor.svg), auto;
   }
 }
 
