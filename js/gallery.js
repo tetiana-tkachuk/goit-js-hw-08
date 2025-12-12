@@ -68,13 +68,13 @@ const galleryList = document.querySelector('.gallery');
 
 const galleryItemsMarkup = images
   .map(
-    image => `<li class="gallery-item">
-  <a class="gallery-link" href="${image.original}">
+    ({ preview, original, description }) => `<li class="gallery-item">
+  <a class="gallery-link" href="${original}">
     <img
       class="gallery-image"
-      src="${image.preview}"
-      data-source="${image.original}"
-      alt="${image.description}"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
     />
   </a>
 </li>`
@@ -82,3 +82,13 @@ const galleryItemsMarkup = images
   .join('');
 
 galleryList.insertAdjacentHTML('beforeend', galleryItemsMarkup);
+
+galleryList.addEventListener('click', e => {
+  e.preventDefault();
+  if (e.target.tagName !== 'IMG') {
+    return;
+  }
+  const imgForModal = e.target.dataset.source;
+  const instance = basicLightbox.create(`<img src="${imgForModal}">`);
+  instance.show();
+});
